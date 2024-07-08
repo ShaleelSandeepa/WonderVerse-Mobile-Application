@@ -30,6 +30,7 @@ const StoryScreen = ({ route }) => {
           {/* <ARBackground />
           <StoryReader story={story} />
           <BackgroundMusic musicFile={require('../assets/musics/twinkle.mp3')} /> */}
+          <Text>{story}</Text>
         </>
       )}
     </View>
