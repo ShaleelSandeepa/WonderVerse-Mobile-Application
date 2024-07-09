@@ -1,8 +1,11 @@
 import axios from 'axios';
 
 export const generateStory = async (details) => {
-  const { age, gender, storyType, mood } = details;
-  const prompt = `Generate an ${storyType} story for a ${age}-year-old ${gender} who is feeling ${mood}. Provide a title for the story as well. word count is less than 450`;
+  const { age, gender, storyType, mood, size } = details;
+  const prompt = `Generate an ${storyType} story for a ${age}-year-old ${gender} who is feeling ${mood}. 
+  Provide a story with word count is less than ${size}. Provide a "title" as the key as simple letters for the story as well. 
+  Provide a the story key as "content" in simple letters. Also Display as "The End" in end of the story. 
+  Format --> title:[title of the story] -->next line--> content:[content of the story] -->Last Line display--> 'The End'`;
 
   console.log('Prompt:', prompt); // Log the prompt for debugging
 
@@ -12,7 +15,6 @@ export const generateStory = async (details) => {
       messages: [
         { role: 'user', content: prompt }
       ],
-      max_tokens: 500,
       temperature: 1,
       top_p: 1
     }, {

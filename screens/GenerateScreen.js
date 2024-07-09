@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import colors from '../Colors';
-import { Picker } from '@react-native-picker/picker';
-import RNPickerSelect from 'react-native-picker-select';
-import { Ionicons } from '@expo/vector-icons';
+import Field from '../components/Field';
 
 const GenerateScreen = ({navigation}) => {
 
@@ -11,89 +9,93 @@ const GenerateScreen = ({navigation}) => {
         age: '', 
         gender: '', 
         storyType: '', 
-        mood: '' 
+        mood: '',
+        size: ''
     });
 
     const handleChange = (key, value) => {
         setDetails({ ...details, [key]: value });
     };
 
+    const ageItems = [
+        { label: 'Select age', value: '' },
+        { label: '1', value: '1' },
+        { label: '2', value: '2' },
+        { label: '3', value: '3' },
+        { label: '4', value: '4' },
+        { label: '5', value: '5' },
+        { label: '10', value: '10' },
+        { label: '12', value: '12' },
+        { label: '14', value: '14' },
+        { label: '16', value: '16' },
+        { label: '18', value: '18' }
+    ];
+
+    const genderItems = [
+        { label: 'Select gender', value: '' },
+        { label: 'boy', value: 'boy' },
+        { label: 'girl', value: 'girl' }
+    ];
+    
+    const storyTypeItems = [
+        { label: 'Select story type', value: '' },
+        { label: 'adventure', value: 'adventure' },
+        { label: 'mystery', value: 'mystery' },
+        { label: 'fantasy', value: 'fantasy' },
+        { label: 'sci-fi', value: 'sci-fi' },
+        { label: 'horror', value: 'horror' },
+        { label: 'comedy', value: 'comedy' },
+        { label: 'romance', value: 'romance' }
+    ];
+    
+    const moodItems = [
+        { label: 'Select mood', value: '' },
+        { label: 'happy', value: 'happy' },
+        { label: 'sad', value: 'sad' },
+        { label: 'excited', value: 'excited' },
+        { label: 'scared', value: 'scared' },
+        { label: 'angry', value: 'angry' },
+        { label: 'curious', value: 'curious' },
+        { label: 'bored', value: 'bored' }
+    ];
+
+    const sizeItems = [
+        { label: 'Select story size', value: 0 },
+        { label: 'small', value: 200 },
+        { label: 'medium', value: 300 },
+        { label: 'large', value: 400 }
+    ];
+    
+
     return (
 
         <View style={styles.container}>
-            <View style={styles.fields}>
-                <Text style={styles.fieldName}>Age</Text>
-                <Picker
-                    selectedValue={details.age}
-                    onValueChange={(itemValue) => handleChange('age', itemValue)}
-                    style={styles.picker}
-                    dropdownIconColor={colors.text1}
-                >
-                    <Picker.Item label="Select age" value="" />
-                    <Picker.Item label="1" value="1" />
-                    <Picker.Item label="2" value="2" />
-                    <Picker.Item label="3" value="3" />
-                    <Picker.Item label="4" value="4" />
-                    <Picker.Item label="5" value="5" />
-                    <Picker.Item label="10" value="10" />
-                    <Picker.Item label="12" value="12" />
-                    <Picker.Item label="14" value="14" />
-                    <Picker.Item label="16" value="16" />
-                    <Picker.Item label="18" value="18" />
-                </Picker>
-            </View>
 
-            <View style={styles.fields}>
-                <Text style={styles.fieldName}>Gender</Text>
-                <Picker
-                    selectedValue={details.gender}
-                    onValueChange={(itemValue) => handleChange('gender', itemValue)}
-                    style={styles.picker}
-                    dropdownIconColor={colors.text1}
-                >
-                    <Picker.Item label="Select gender" value="" />
-                    <Picker.Item label="boy" value="boy" />
-                    <Picker.Item label="girl" value="girl" />
-                </Picker>
-            </View>
-
-            <View style={styles.fields}>
-                <Text style={styles.fieldName}>Story Type</Text>
-                <Picker
-                    selectedValue={details.storyType}
-                    onValueChange={(itemValue) => handleChange('storyType', itemValue)}
-                    style={styles.picker}
-                    dropdownIconColor={colors.text1}
-                >
-                    <Picker.Item label="Select story type" value="" />
-                    <Picker.Item label="adventure" value="adventure" />
-                    <Picker.Item label="mystery" value="mystery" />
-                    <Picker.Item label="fantasy" value="fantasy" />
-                    <Picker.Item label="sci-fi" value="sci-fi" />
-                    <Picker.Item label="horror" value="horror" />
-                    <Picker.Item label="comedy" value="comedy" />
-                    <Picker.Item label="romance" value="romance" />
-                </Picker>
-            </View>
-
-            <View style={styles.fields}>
-                <Text style={styles.fieldName}>Mood</Text>
-                <Picker
-                    selectedValue={details.mood}
-                    onValueChange={(itemValue) => handleChange('mood', itemValue)}
-                    style={styles.picker}
-                    dropdownIconColor={colors.text1}
-                >
-                    <Picker.Item label="Select mood" value="" />
-                    <Picker.Item label="happy" value="happy" />
-                    <Picker.Item label="sad" value="sad" />
-                    <Picker.Item label="excited" value="excited" />
-                    <Picker.Item label="scared" value="scared" />
-                    <Picker.Item label="angry" value="angry" />
-                    <Picker.Item label="curious" value="curious" />
-                    <Picker.Item label="bored" value="bored" />
-                </Picker>
-            </View>
+            <Field
+                fieldName={'Age'} 
+                selectedValue={details.age}
+                onValueChange={(value) => handleChange('age', value)}
+                items={ageItems} />
+            <Field
+                fieldName={'Gender'} 
+                selectedValue={details.gender}
+                onValueChange={(value) => handleChange('gender', value)} 
+                items={genderItems} />
+            <Field 
+                fieldName={'Story Type'} 
+                selectedValue={details.storyType}
+                onValueChange={(value) => handleChange('storyType', value)}
+                items={storyTypeItems} />
+            <Field 
+                fieldName={'Mood'} 
+                selectedValue={details.mood}
+                onValueChange={(value) => handleChange('mood', value)} 
+                items={moodItems} />
+            <Field 
+                fieldName={'Size'} 
+                selectedValue={details.size}
+                onValueChange={(value) => handleChange('size', value)} 
+                items={sizeItems} />
 
             <TouchableOpacity
                 style={styles.button}
